@@ -1,0 +1,233 @@
+.headers
+{
+    height: 150px;
+    background-color: #8A0808; 
+}
+
+.expediente-header
+{
+    height: 70px;
+    
+}
+
+.header-logo
+{
+    height: 150px;
+    width: 150px;
+    background: #FFFFFF;
+    background-image: url("../images/menu/logo.png");
+    margin-bottom: -100px;
+    float: left;
+}
+
+.panel-menu-horizontal
+{
+    padding-left: 276px;
+    padding-right: 1px;
+}
+
+.info-paciente
+{
+    padding-top: 28px;
+}
+
+.table-encabezado tr, .table-encabezado td
+{
+    padding: 2px 2px 2px 2px !important;
+}
+
+.columna
+{
+    padding-top: 1px;
+    padding-right: 10px;
+    padding-bottom: 0;
+}
+
+.ui-custompanelgrid, .ui-custompanelgrid td, .ui-custompanelgrid tr  
+{
+    background-color: #1e589c !important;
+    border: 0;
+    color: #ffffff;
+}
+
+.titulo
+{
+    font-weight: bold;
+}
+
+.diag .ui-selectonemenu-label 
+{
+    color: #ffea00 !important;
+    background: #1e589c !important;
+    border: 0px solid #ffffff;
+    max-height: 550px !important;
+}
+
+.alergia .ui-selectonemenu-label 
+{
+    color: #ff0000 !important;
+    /*background: #1e589c !important;*/
+    border: 0px solid #ffffff;
+    max-height: 550px !important;
+}
+
+.encab .ui-selectonemenu-trigger
+{
+    /*background:#346ee7 url("../images/images-redmont-timsa/ui-bg_inset-soft_70_346ee7_1x100.png") 50% 50% repeat-x !important;*/
+}
+
+.encab .ui-selectonemenu-trigger:hover
+{
+    background:#7199ec url("../images/images-redmont-timsa/ui-bg_highlight-hard_55_7199ec_1x100.png") 50% 50% repeat-x !important;
+}
+
+/*login*/
+
+.access-direct-link
+{
+    text-decoration: none;
+}
+
+.boton-salir
+{
+    text-align: center;
+    font-size: 10px;
+
+    margin-top: 7px;
+    margin-bottom: 1px;
+    margin-left: 30px;
+    margin-right: 15px;
+    border:1px solid #ffffff;
+    padding: 3px 12px 3px 12px;
+    border-radius: 10px;
+    background-color: #DF3A01;
+    float: right;
+}
+
+.boton-salir:hover, .boton-salir:active
+{
+    background-color: #FF4000;
+}
+
+a.boton-salir:link, a.boton-salir:visited, a.boton-salir:active, a.boton-salir:hover
+{
+    color: #ffffff;
+    font-weight: bold;
+
+}
+
+.ui-icon-text
+{
+    color: #ffffff;
+    font-weight: normal;
+    font-size: 9px;
+    margin-top: 10px;
+}
+
+.ui-icon-login
+{
+    background-image: url("../images/images-redmont-timsa/user.png");
+    height: 24px;
+    width: 24px;
+    margin-top: 3px;
+    margin-bottom: 1px;
+    margin-left: 15px;
+    margin-right: 5px;
+    float: right
+}
+
+.ui-icon-sucursal
+{
+    background-image: url("../images/images-redmont-timsa/sucursal8.png");
+    height: 24px;
+    width: 24px;
+    margin-top: 3px;
+    margin-bottom: 1px;
+    margin-left: 15px;
+    margin-right: 5px;
+    float: right
+}
+
+.ui-icon-user-text
+{
+    float: right;
+}
+
+.nombre-paciente
+{
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/* LINKS CON APARIENCIA DE BOTONES */
+.botones-menu
+{
+    text-align: center;
+    font-size: 9.5px;
+
+    border-top:1px solid #0916c5;
+    border-left: 1px solid #0916c5;
+    border-right: 1px solid #0916c5;
+    border-bottom: 0;
+    border-style: solid;
+    padding: 5px 8px 4px 8px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background:#346ee7 url("../images/images-redmont-timsa/ui-bg_inset-soft_70_346ee7_1x100.png") 50% 50% repeat-x;
+    margin: 1px;
+}
+
+a.botones-menu:link, a.botones-menu:visited
+{
+    font-family: Lucida Grande, Lucida Sans, Arial, sans-serif;
+    color:#ffffff;
+    text-decoration:none;
+    font-weight: normal;
+}
+
+.botones-menu:hover
+{
+    border-top:1px solid #0916c5;
+    border-left: 1px solid #0916c5;
+    border-right: 1px solid #0916c5;
+    border-bottom: 0;
+    background:#7199ec url("../images/images-redmont-timsa/ui-bg_highlight-hard_55_7199ec_1x100.png") 50% 50% repeat-x;
+}
+
+a.botones-menu:hover
+{
+    font-family: Lucida Grande, Lucida Sans, Arial, sans-serif;
+    color:#1d5987;
+    text-decoration:none;
+    font-weight: normal;
+}
+
+.botones-menu:active
+{
+    border-top:1px solid #79b7e7;
+    border-left: 1px solid #79b7e7;
+    border-right: 1px solid #79b7e7;
+    border-bottom: 0;
+    background:#c3d4fb url("../images/images-redmont-timsa/ui-bg_flat_100_c3d4fb_40x100.png") 50% 50% repeat-x;
+    font-weight:bold;
+}
+
+a.botones-menu:active
+{
+    font-weight:bold;
+    color:#170dc6;
+}
+
+.div-botones
+{
+    padding-top: 9px; 
+    padding-left: 5px; 
+    background-color: #1e589c; 
+    border: 1px solid #ffffff; 
+    border-radius: 10px; 
+    height: 20px;
+}
+
+/* END BOTONES */
+

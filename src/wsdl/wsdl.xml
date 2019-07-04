@@ -1,0 +1,163 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://tempuri.org/">
+    <wsdl:types>
+        <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+            <s:element name="HelloWorld">
+                <s:complexType/>
+            </s:element>
+            <s:element name="HelloWorldResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="wsFamiliares">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="iGrupo" type="s:short"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="iSucursal" type="s:short"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="iTipoDePaciente" type="s:short"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="iTipoDeEmpresa" type="s:short"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="iNumeroDeEmpresa" type="s:short"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="iNumeroDeExpediente" type="s:short"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="iTipoDeFamiliar" type="s:short"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sNombre" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sApellidoPaterno" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sApellidoMaterno" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sCalle" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sNumeroExterior" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sNumeroInterno" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sColonia" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sCodigoPostal" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sMunicipio" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sTelefono" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sTelefonoOficina" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sExtensionOficina" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sCelular" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sCorreoElectronico" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="wsFamiliaresResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="wsFamiliaresResult" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="wsPaciente">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="iGrupo" type="s:short"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="iSucursal" type="s:short"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="iTipoDePaciente" type="s:short"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="iTipoDeEmpresa" type="s:short"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="iNumeroDeEmpresa" type="s:short"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="iNumeroDeExpediente" type="s:short"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sNombre" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sApellidoPaterno" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sApellidoMaterno" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sSexo" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="dtFechaDeNacimiento" type="s:dateTime"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sEstadoCivil" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sNivelSocioEconomico" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sDiscapacidad" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sGrupoEtnico" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sReligion" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sTipoVivienda" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sCurp" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sTipoDeDomicilio" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sCalle" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sNumeroExterior" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sNumeroInterior" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sColonia" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sCodigoPostal" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sMunicipio" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sEstado" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sLocalidad" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sTelefono" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sTelefonoOficina" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sExtensionOficina" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sCelular" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="sCorreoElectronico" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="wsPacienteResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="wsPacienteResult" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+        </s:schema>
+    </wsdl:types>
+    <wsdl:message name="HelloWorldSoapIn">
+        <wsdl:part name="parameters" element="tns:HelloWorld"/>
+    </wsdl:message>
+    <wsdl:message name="HelloWorldSoapOut">
+        <wsdl:part name="parameters" element="tns:HelloWorldResponse"/>
+    </wsdl:message>
+    <wsdl:message name="wsFamiliaresSoapIn">
+        <wsdl:part name="parameters" element="tns:wsFamiliares"/>
+    </wsdl:message>
+    <wsdl:message name="wsFamiliaresSoapOut">
+        <wsdl:part name="parameters" element="tns:wsFamiliaresResponse"/>
+    </wsdl:message>
+    <wsdl:message name="wsPacienteSoapIn">
+        <wsdl:part name="parameters" element="tns:wsPaciente"/>
+    </wsdl:message>
+    <wsdl:message name="wsPacienteSoapOut">
+        <wsdl:part name="parameters" element="tns:wsPacienteResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ServiceSoap">
+        <wsdl:operation name="HelloWorld">
+            <wsdl:input message="tns:HelloWorldSoapIn"/>
+            <wsdl:output message="tns:HelloWorldSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="wsFamiliares">
+            <wsdl:input message="tns:wsFamiliaresSoapIn"/>
+            <wsdl:output message="tns:wsFamiliaresSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="wsPaciente">
+            <wsdl:input message="tns:wsPacienteSoapIn"/>
+            <wsdl:output message="tns:wsPacienteSoapOut"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="HelloWorld">
+            <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="wsFamiliares">
+            <soap:operation soapAction="http://tempuri.org/wsFamiliares" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="wsPaciente">
+            <soap:operation soapAction="http://tempuri.org/wsPaciente" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Service">
+        <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+            <soap:address location="http://190.143.138.67:90/Service.asmx"/>
+        </wsdl:port>    
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/main.xhtml">
+
+    <ui:define name="content"> 
+        <h:form id="consultar-movimientos-form">
+            <p:messages id="msgGrowl" autoUpdate="true" closable="true"/>
+            <p:panel header="Movimientos" >
+                <p:dataTable id="tabla-movimientos" value="#{consultarMovimientosController.consultaMovimientosForm.modelList}" var="model"                             
+                             emptyMessage="No hay empleados registrados">
+                    <f:facet name="header">
+                        <h:outputText value="Movimientos" />
+                    </f:facet>                    
+                    <p:column headerText="No. de Empleado" styleClass="centrado">
+                        <h:outputText value="#{model.usuarioID}" />
+                    </p:column>
+                    <p:column headerText="Nombre" styleClass="centrado">
+                        <h:outputText value="#{model.nombre}" />
+                    </p:column>
+                    <p:column headerText="Movimiento ID" styleClass="centrado">
+                        <h:outputText value="#{model.movimientoID}" />
+                    </p:column>
+                    <p:column headerText="Fecha del movimiento" styleClass="centrado" >
+                        <h:outputText value="#{model.fechaMovimiento}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton action="#{consultarMovimientosController.clickModificar()}" oncomplete="dialogModificar.show()" title="Modificar" value="Modificar" update=":consultar-movimientos-form:dialogo-modificar">
+                            <f:setPropertyActionListener value="#{model}" target="#{consultarMovimientosController.consultaMovimientosForm.modelSelected}" />
+                        </p:commandButton>
+                    </p:column>
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton oncomplete="dialogEliminar.show()" title="Eliminar" value="Eliminar">
+                            <f:setPropertyActionListener value="#{model}" target="#{consultarMovimientosController.consultaMovimientosForm.modelSelected}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>     
+
+            <p:dialog id="dialogo-modificar" header="Editar Movimiento" widgetVar="dialogModificar" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="40%">
+                <p:panelGrid id="panel" columns="2">
+                    <h:outputText value="Numero de empleado:"/>
+                    <p:inputText readonly="true" value="#{consultarMovimientosController.consultaMovimientosForm.usuario.usuarioID}" />
+
+                    <h:outputText value="Nombre:"/>
+                    <p:inputText readonly="true" value="#{consultarMovimientosController.consultaMovimientosForm.usuario.nombre} #{consultarMovimientosController.consultaMovimientosForm.usuario.APaterno} #{consultarMovimientosController.consultaMovimientosForm.usuario.AMaterno}" />
+
+                    <h:outputText value="Rol:"/>
+                    <p:inputText readonly="true" value="#{consultarMovimientosController.consultaMovimientosForm.usuario.crol.descripcion}" />
+
+                    <h:outputText value="Tipo:"/>
+                    <p:inputText readonly="true" value="#{consultarMovimientosController.consultaMovimientosForm.usuario.ctipoempleado.descripcion}" />
+
+                    <h:outputText value="Fecha:"/>
+                    <p:calendar navigator="true" yearRange="-100:+0" showOn="button" id="fecha" value="#{consultarMovimientosController.consultaMovimientosForm.fecha}" pattern="dd/MM/yyyy" maxdate="#{consultarMovimientosController.consultaMovimientosForm.fechaActual}" readonlyInput="true" />
+
+                    <h:outputText value="Cantidad de Entregas:"/>
+                    <p:spinner id="basic" value="#{consultarMovimientosController.consultaMovimientosForm.movimiento.cantidadEntregas}" min="0">
+                        <p:ajax process="@this" />
+                    </p:spinner>
+                </p:panelGrid>
+                <p:panelGrid columns="3" rendered="#{consultarMovimientosController.consultaMovimientosForm.usuario.crol.rolID == 4 ? true : false}">
+                    <p:selectBooleanCheckbox value="#{consultarMovimientosController.consultaMovimientosForm.movimiento.cubrirTurno}">
+                        <p:ajax update="panel-roles" />
+                    </p:selectBooleanCheckbox>
+                    <h:outputText value="Cubrio turno"/>
+                    <p:panel id="panel-roles">
+                        <p:selectOneRadio rendered="#{consultarMovimientosController.consultaMovimientosForm.movimiento.cubrirTurno}" value="#{consultarMovimientosController.consultaMovimientosForm.movimiento.tipoEmpleadoIDCubierto}">
+                            <f:selectItem itemLabel="Chofer" itemValue="2" />
+                            <f:selectItem itemLabel="Cargador" itemValue="3" />
+                        </p:selectOneRadio>
+                    </p:panel>
+                </p:panelGrid>
+                <p:spacer width="10" height="40" />
+                <div align="center" class="footer">
+                    <p:commandButton value="Guardar" action="#{consultarMovimientosController.actualizarMovimiento()}" oncomplete="dialogModificar.hide()" styleClass="boton-guardar" update=":consultar-movimientos-form:tabla-movimientos"/>
+                    <p:commandButton value="Cancelar" styleClass="boton-cancelar" oncomplete="dialogModificar.hide()"/>
+                </div> 
+            </p:dialog>
+
+            <p:dialog header="Eliminar Movimiento" widgetVar="dialogEliminar" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:spacer width="10" height="40" />
+                <div align="center" class="footer">
+                    <p:commandButton value="Eliminar" action="#{consultarMovimientosController.eliminarMovimiento()}" oncomplete="dialogEliminar.hide()" styleClass="boton-guardar" update=":consultar-movimientos-form:tabla-movimientos" />
+                    <p:commandButton value="Cancelar" styleClass="boton-cancelar" oncomplete="dialogEliminar.hide()"/>
+                </div> 
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+

@@ -1,0 +1,120 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/main.xhtml">
+
+    <ui:define name="content"> 
+        <h:form id="administrar-form">
+            <p:messages id="msgGrowl" autoUpdate="true" closable="true"/>
+            <p:panel header="Administración de Empleados" >
+                <p:commandButton value="Agregar Empleado" action="#{administrarEmpleadosController.clickAgregar()}" oncomplete="dialogEmpleado.show()" update=":administrar-form:dialog-empleado" />
+                <p:dataTable id="tabla-empleados" value="#{administrarEmpleadosController.administrarEmpleadosForm.usuarios}" var="usuario" 
+                             emptyMessage="No hay empleados registrados">
+                    <f:facet name="header">
+                        <h:outputText value="Empleados" />
+                    </f:facet>
+                    <p:column headerText="No. de Empleado" styleClass="centrado">
+                        <h:outputText value="#{usuario.usuarioID}" />
+                    </p:column>
+                    <p:column headerText="Nombre" styleClass="centrado">
+                        <h:outputText value="#{usuario.nombre} #{usuario.APaterno} #{usuario.AMaterno}" />
+                    </p:column>
+                    <p:column headerText="Rol" styleClass="centrado">
+                        <h:outputText value="#{usuario.crol.descripcion}" />
+                    </p:column>
+                    <p:column headerText="Tipo de Empleado" styleClass="centrado">
+                        <h:outputText value="#{usuario.ctipoempleado.descripcion}" />
+                    </p:column>
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton action="#{administrarEmpleadosController.clickModificar()}" oncomplete="dialogEmpleado.show()" title="Modificar" value="Modificar" update=":administrar-form:panel :administrar-form:dialog-empleado">
+                            <f:setPropertyActionListener value="#{usuario}" target="#{administrarEmpleadosController.administrarEmpleadosForm.usuarioSelected}" />
+                        </p:commandButton>
+                    </p:column>
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton oncomplete="dialogEliminar.show()" title="Eliminar" value="Eliminar">
+                            <f:setPropertyActionListener value="#{usuario}" target="#{administrarEmpleadosController.administrarEmpleadosForm.usuarioSelected}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+
+            <p:dialog id="dialog-empleado" header="#{administrarEmpleadosController.administrarEmpleadosForm.titulo}" widgetVar="dialogEmpleado" modal="true" showEffect="fade" hideEffect="fade" resizable="false">                
+                <p:panelGrid id="panel">
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Nombre"/>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{administrarEmpleadosController.administrarEmpleadosForm.nombre}"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Apellido Paterno"/>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{administrarEmpleadosController.administrarEmpleadosForm.aPaterno}"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Apellido Materno"/>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{administrarEmpleadosController.administrarEmpleadosForm.aMaterno}"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Rol: " for="rolOrganizacion"/>
+                        </p:column>
+                        <p:column>
+                            <p:selectOneMenu id="rolOrganizacion" value="#{administrarEmpleadosController.administrarEmpleadosForm.rol.rolID}" filter="true" filterMatchMode="contains">
+                                <f:selectItems value="#{administrarEmpleadosController.administrarEmpleadosForm.roles}" var="rol" itemValue="#{rol.rolID}" itemLabel="#{rol.descripcion}" />
+                            </p:selectOneMenu> 
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Tipo Empleado: " for="tipoEmpleado"/>
+                        </p:column>
+                        <p:column>
+                            <p:selectOneMenu id="tipoEmpleado" value="#{administrarEmpleadosController.administrarEmpleadosForm.tipoempleado.tipoEmpleadoID}" filter="true" filterMatchMode="contains">
+                                <f:selectItems value="#{administrarEmpleadosController.administrarEmpleadosForm.tiposEmpleadoList}" var="tipoEmpleado" itemValue="#{tipoEmpleado.tipoEmpleadoID}" itemLabel="#{tipoEmpleado.descripcion}" />
+                            </p:selectOneMenu> 
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+                <p:spacer width="10" height="40" />
+                <div align="center" class="footer">
+                    <p:commandButton value="Guardar" action="#{administrarEmpleadosController.guardarEmpleado()}" oncomplete="dialogEmpleado.hide()" styleClass="boton-guardar" update=":administrar-form:tabla-empleados :administrar-form:dialog-generado" />
+                    <p:commandButton value="Cancelar" styleClass="boton-cancelar" oncomplete="dialogEmpleado.hide()"/>
+                </div> 
+            </p:dialog>
+            
+            <p:dialog id="dialog-generado" visible="#{administrarEmpleadosController.administrarEmpleadosForm.renderGrowl}" header="Importante" modal="true" resizable="false" draggable="false" closable="true" position="center">
+                <p:ajax event="close" listener="#{administrarEmpleadosController.cerrarDialog()}"/>
+                <div align="center">
+                    <h:outputText value="Se ha generado con exito su usuario y contraseña de acceso" styleClass="mensaje"/>
+                    <br />
+                    <br />
+                    <br />
+                    <h:outputText value="Favor de anotar su numero de usuario y contraseña."/>
+                    <br />
+                    <br />
+                    <h:outputText value="Usuario: #{administrarEmpleadosController.administrarEmpleadosForm.usuarioGenerado}" style="font-weight: bold;"/>
+                    <p:spacer width="35px" height="1px"/>
+                    <h:outputText value="Contraseña: #{administrarEmpleadosController.administrarEmpleadosForm.passwordGenerado}" style="font-weight: bold;"/>
+                </div>
+            </p:dialog>
+            
+            <p:dialog header="Eliminar Empleado" widgetVar="dialogEliminar" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:spacer width="10" height="40" />
+                <div align="center" class="footer">
+                    <p:commandButton value="Eliminar" action="#{administrarEmpleadosController.eliminarEmpleado()}" oncomplete="dialogEliminar.hide()" styleClass="boton-guardar" update=":administrar-form:tabla-empleados" />
+                    <p:commandButton value="Cancelar" styleClass="boton-cancelar" oncomplete="dialogEliminar.hide()"/>
+                </div> 
+            </p:dialog>
+            
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+
+

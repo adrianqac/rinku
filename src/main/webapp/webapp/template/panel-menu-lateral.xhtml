@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" > 
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">  
+
+    <link rel="StyleSheet" href="#{request.contextPath}/webapp/css/panel-menu-lateral.css" type="text/css" media="screen"/>
+    <ui:fragment rendered="#{perfilUsuarioController.renderPanel}" >
+        <div class="panel-menu-lateral ui-widget ui-widget-header">
+            <h:form rendered="#{perfilUsuarioController.perfilAdmin}" id="panel-lateral-form">
+                <p:accordionPanel activeIndex="-1" style="width: 255px" styleClass="acordeon">  
+                   <p:tab  title="Empleados">
+                        <h:outputLink value="#{request.contextPath}/webapp/private/Empleados/administrar-empleados.jsf" >
+                            <h:outputText value="Administrar" />
+                        </h:outputLink>
+                    </p:tab>
+                    <p:tab  title="Movimientos">
+                        <h:outputLink value="#{request.contextPath}/webapp/private/Empleados/movimientos.jsf" >
+                            <h:outputText value="Nuevo" />
+                        </h:outputLink>
+                        <p:separator/>
+                        <h:outputLink value="#{request.contextPath}/webapp/private/Empleados/consultar-movimientos.jsf" >
+                            <h:outputText value="Consultar" />
+                        </h:outputLink>
+                    </p:tab>
+                    <p:tab  title="Nomina">
+                        <h:outputLink value="#{request.contextPath}/webapp/private/Empleados/pagos.jsf" >
+                            <h:outputText value="Pagos por empleado" />
+                        </h:outputLink>
+                    </p:tab>
+                </p:accordionPanel>   
+            </h:form>
+        </div>
+    </ui:fragment>
+</html> 

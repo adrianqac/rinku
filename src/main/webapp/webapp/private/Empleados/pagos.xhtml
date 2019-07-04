@@ -1,0 +1,107 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../template/main.xhtml">
+
+    <ui:define name="content"> 
+        <h:form id="pagos-form">
+            <p:messages id="msgGrowl" autoUpdate="true" closable="true"/>
+            <p:panel header="Pagos por empleado" >
+                <p:dataTable id="tabla-empleados" value="#{pagosController.pagosForm.usuarios}" var="usuario" 
+                             selectionMode="single" selection="#{pagosController.pagosForm.usuarioSelected}" rowKey="#{usuario}"
+                             emptyMessage="No hay empleados registrados">
+                    <f:facet name="header">
+                        <h:outputText value="Empleados" />
+                    </f:facet>
+                    <p:ajax event="rowSelect" oncomplete="dialogPagos.show()" update=":pagos-form:dialog-pago" />
+                    <p:column headerText="No. de Empleado" styleClass="centrado">
+                        <h:outputText value="#{usuario.usuarioID}" />
+                    </p:column>
+                    <p:column headerText="Nombre" styleClass="centrado">
+                        <h:outputText value="#{usuario.nombre} #{usuario.APaterno} #{usuario.AMaterno}" />
+                    </p:column>
+                    <p:column headerText="Rol" styleClass="centrado">
+                        <h:outputText value="#{usuario.crol.descripcion}" />
+                    </p:column>
+                    <p:column headerText="Tipo de Empleado" styleClass="centrado">
+                        <h:outputText value="#{usuario.ctipoempleado.descripcion}" />
+                    </p:column>
+                </p:dataTable>
+            </p:panel>     
+
+            <p:dialog id="dialog-pago" header="Pagos por mes" widgetVar="dialogPagos" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+                      position="center" width="60%">
+                <p:ajax event="close" listener="#{pagosController.cerrarDialog()}"/>
+                <p:panelGrid>
+                    <p:row>
+                        <p:column>
+                            <h:outputText value="Selecciona el rango de fechas en el que desea calcular el sueldo"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Fecha Inicial:" />
+                        </p:column>
+                        <p:column>
+                            <p:calendar navigator="true" yearRange="-100:+0" showOn="button" id="fechaInicial" value="#{pagosController.pagosForm.fechaInicial}"
+                                        label="fdn" required="true"  pattern="dd/MM/yyyy" maxdate="#{pagosController.pagosForm.fechaFinal}"
+                                        readonlyInput="true">
+                                <p:ajax event="dateSelect" update="fechaFinal" />
+                            </p:calendar>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Fecha Final:" />
+                        </p:column>
+                        <p:column>
+                            <p:calendar navigator="true" yearRange="-100:+0" showOn="button" id="fechaFinal" value="#{pagosController.pagosForm.fechaFinal}" 
+                                        label="fdn" required="true"  pattern="dd/MM/yyyy"
+                                        maxdate="#{pagosController.pagosForm.fechaActual}"
+                                        mindate="#{pagosController.pagosForm.fechaInicial}"
+                                        readonlyInput="true">
+                                <p:ajax event="dateSelect" update="fechaInicial" />
+                            </p:calendar>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:commandButton action="#{pagosController.calcularPago()}" title="Calcular" value="Calcular" update="panelPagos"/>
+                        </p:column>                        
+                    </p:row>
+                </p:panelGrid>
+                <p:spacer width="10" height="30" />
+                <p:panelGrid id="panelPagos" >
+                    <p:row rendered="#{pagosController.pagosForm.renderPagos}">
+                        <p:column>
+                            <h:outputText value="Fueron #{pagosController.pagosForm.diasLaborados} dias laborados y tiene #{pagosController.pagosForm.movimientos.size()} movimientos en ese periodo" />
+                        </p:column>                        
+                    </p:row>
+                    <p:row rendered="#{pagosController.pagosForm.renderPagos}">
+                        <p:column rendered="#{pagosController.pagosForm.usuarioSelected.ctipoempleado.tipoEmpleadoID == 1}">
+                            <h:outputText value="Vales de despensa: #{pagosController.pagosForm.valesDespensa}"/>
+                        </p:column>   
+                        <p:column rendered="#{pagosController.pagosForm.usuarioSelected.ctipoempleado.tipoEmpleadoID != 1}">
+                            <h:outputText value="Vales de despensa: No aplica por ser externo"/>
+                        </p:column> 
+                    </p:row>
+                    <p:row rendered="#{pagosController.pagosForm.renderPagos}">
+                        <p:column>
+                            <h:outputText value="Sueldo total: #{pagosController.pagosForm.sueldoTotal} MXN" style="font-weight: bold"/>
+                        </p:column>                        
+                    </p:row>
+                </p:panelGrid>
+                <p:spacer width="10" height="40" />
+                <div align="center" class="footer">
+                    <p:commandButton value="Aceptar" oncomplete="dialogPagos.hide()" styleClass="boton-guardar"/>                    
+                </div>
+            </p:dialog>
+            
+            
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+

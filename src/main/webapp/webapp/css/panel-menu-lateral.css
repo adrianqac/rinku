@@ -1,0 +1,10 @@
+.panel-menu-lateral
+{
+    width: 230px;
+    height: 70vh;
+    float: left;
+    alignment-adjust: central;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-bottom: 10px;
+}

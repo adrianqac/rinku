@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../../webapp/template/main.xhtml">
+
+    <ui:define name="content">
+        <h:head>           
+            <link type="text/css" rel="stylesheet" href="#{request.contextPath}/webapp/css/login.css" />
+        </h:head>
+        <h:form id="login-form" prependId="false">
+            <p:panel styleClass="login-panel" header="Registro de usuarios">
+                <p:messages showDetail="true"/>
+                <h:panelGrid columns="2">
+                    <p:fieldset styleClass="login-fieldset-img login-fieldset" >                                                      
+                        <p:graphicImage value="/webapp/images/login_2.png" style="float: left"/>                                                      
+                        <h5>
+                            Favor de ingresar sus credenciales, si usted no cuenta con una cuenta deberá
+                            crear una para poder ingresar.
+                        </h5>
+                    </p:fieldset>
+                    <p:fieldset  styleClass="login-fieldset-user login-fieldset">
+                        <p:fieldset  styleClass="login-panel">
+
+                            <label for="username">Usuario</label>
+                            <h:inputText styleClass="text" 
+                                         id="j_username" 
+                                         required="true" 
+                                         requiredMessage="El nombre de usuario es requerido"
+                                         label="usuario" 
+                                         value="#{loginController.usuario.nombreUsuario}"/>
+
+                            <label for="password">Contraseña</label>
+                            <h:inputSecret id="j_password"  
+                                           styleClass="text" 
+                                           required="true"  
+                                           requiredMessage="La clave es requerida"
+                                           label="clave" 
+                                           value="#{loginController.usuario.password}"/> 
+
+                            <h:panelGrid columns="3">
+                                <p:commandButton id="login" ajax="false" action="#{loginController.login}" value="Acceso" />
+                            </h:panelGrid>
+                        </p:fieldset>                                                                                                   
+                    </p:fieldset> 
+                </h:panelGrid>
+
+            </p:panel>                                    
+        </h:form>
+    </ui:define>
+</ui:composition>

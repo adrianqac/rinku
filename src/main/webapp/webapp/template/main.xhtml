@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" > 
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>  
+        <title>Rinku - Examen</title>        
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" ></meta>
+        <link rel="StyleSheet" href="#{request.contextPath}/webapp/css/theme-redmont-timsa.css" type="text/css" media="screen"/>
+        <link rel="StyleSheet" href="#{request.contextPath}/webapp/css/main.css" type="text/css" media="screen"/>
+        <link rel="StyleSheet" href="#{request.contextPath}/webapp/css/content.css" type="text/css" media="screen"/>
+        <h:outputScript library="primefaces" name="jquery/jquery.js" />        
+        <script language="javascript" type="text/javascript" src="#{request.contextPath}/webapp/js/config.js" />           
+        <script language="javascript" type="text/javascript" src="#{request.contextPath}/webapp/js/get-urlvar-plugins.js" />    
+
+    </h:head>  
+    <h:body>
+        <div class="headers" style="display: #{mainController.mostrar}">
+            <ui:include src="header.xhtml" />
+            <div class="panel-menu-horizontal">
+                <ui:include src="panel-menu-horizontal.xhtml"></ui:include>
+            </div>
+        </div>
+        <div style="display: #{mainController.mostrar}">
+            <ui:include src="panel-menu-lateral.xhtml" /> 
+        </div>
+
+        <div class="content">
+            <ui:insert name="content"></ui:insert>
+        </div>
+        <div style="display: #{mainController.mostrar}">
+            <ui:include src="footer.xhtml" />
+        </div>
+    </h:body> 
+
+</html> 
+

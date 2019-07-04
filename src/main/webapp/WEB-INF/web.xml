@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+        
+    <display-name>Rinku</display-name>
+    <welcome-file-list>
+        <welcome-file>webapp/common/authentication/login.jsf</welcome-file>
+    </welcome-file-list>    
+   
+    <!-- ******************************** jsf  *******************************--> 
+    <context-param>  
+        <param-name>primefaces.THEME</param-name>  
+        <param-value>none</param-value>  
+    </context-param>      
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.jsf</url-pattern>
+    </servlet-mapping>
+    <context-param>
+        <param-name>javax.faces.CONFIG_FILES</param-name>
+        <param-value>/WEB-INF/jsf/faces-config.xml</param-value>
+    </context-param>
+    
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+    <!-- *************************** end jsf  *******************************-->  
+        
+    <!-- *************************    spring context ************************-->         
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+    
+   
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/spring/applicationContext-main.xml      
+            /WEB-INF/spring/applicationContext-hibernate.xml      
+            /WEB-INF/spring/applicationContext-security.xml      
+        </param-value>
+    </context-param> 
+    <!-- ************************ end spring context ************************-->         
+
+    <!--        Filtros para la seguridad    -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>        
+    </filter-mapping>
+    <!--Crerar la session cuando se destruye el objecto-->    
+    <filter>
+        <filter-name>hibernateFilter</filter-name>
+        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+        <init-param>
+            <param-name>sessionFactoryBeanName</param-name>
+            <param-value>sessionFactory</param-value>
+        </init-param>
+    </filter>       
+
+    <!-- Si se detecta una vista que ha expirado, muestra esta página de error -->
+    <error-page>
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+        <location>/webapp/common/exception/error-view-expired.jsf</location>
+    </error-page>
+    <!-- Página a mostrar cuando se realice la solicitud de un recurso inexistente -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/webapp/common/exception/page-not-found.jsf</location>
+    </error-page>
+    <!-- Atrapa cualquier error que provenga del lado del server -->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/webapp/common/exception/server-error.jsf</location>
+    </error-page>
+
+    <!--Session expirada; administrada por spring    -->
+    <listener>
+        <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+    </listener>
+    <!-- Cada sesión tendrá un timeout por inactividad de 40 minutos -->
+    <session-config>
+        <session-timeout>120</session-timeout>
+    </session-config>
+    <!--selecciona la zona horaria de pordefaul del sistema-->
+    <context-param>
+        <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    
+</web-app>
